@@ -1,0 +1,22 @@
+% 
+clear all;
+close all;
+clc;
+
+fileName = 'D:\Wei_alpha_syn_data\MIP\Luc_mono\MAX_Luc mono 1.tif';
+fileName = 'D:\Wei_alpha_syn_data\MIP\TMEM_PFF\'
+
+info = imfinfo(fileName);
+num_images = numel(info);
+
+img = double(imread(fileName, 3, 'Info', info));
+
+options = struct('FrangiScaleRange', [5 10], 'FrangiScaleRatio', 1, 'FrangiBetaOne', .5, 'FrangiBetaTwo', 15, 'verbose',true,'BlackWhite',false);
+
+
+[outIm,whatScale,Direction] = FrangiFilter2D(img, options);
+
+figure,
+subplot(121);imshow(img,[]);
+subplot(122);imshow(outIm,[]);
+
